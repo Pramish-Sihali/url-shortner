@@ -5,13 +5,13 @@ import { AnalyticsService } from '@/lib/analytics-service'
 import { headers } from 'next/headers'
 
 interface RedirectPageProps {
-  params: {
+  params: Promise<{
     shortCode: string
-  }
+  }>
 }
 
 export default async function RedirectPage({ params }: RedirectPageProps) {
-  const { shortCode } = params
+  const { shortCode } = await params
   
   try {
     // Get original URL
@@ -23,7 +23,7 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
     }
 
     // Record click analytics asynchronously
-    const headersList = await headers() // Fixed: Added await
+    const headersList = await headers()
     const request = {
       headers: {
         get: (name: string) => headersList.get(name)
@@ -43,7 +43,7 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
 
 // Generate metadata for the redirect page
 export async function generateMetadata({ params }: RedirectPageProps) {
-  const { shortCode } = params
+  const { shortCode } = await params
   
   try {
     const urlStats = await UrlService.getUrlStats(shortCode)

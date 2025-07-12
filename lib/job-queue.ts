@@ -2,10 +2,24 @@ import { nanoid } from 'nanoid'
 import { supabaseServer } from './supabase'
 import { cache } from './cache'
 
+interface RecordClickJobData {
+  url_id: string
+  ip_address: string
+  user_agent: string
+  referer: string
+  device_type: string
+  browser: string
+  os: string
+  shortCode: string
+  originalIP: string
+}
+
+type JobData = RecordClickJobData
+
 interface Job {
   id: string
   type: string
-  data: any
+  data: JobData
   createdAt: Date
   attempts: number
 }
@@ -16,7 +30,7 @@ class JobQueueManager {
   private readonly MAX_ATTEMPTS = 3
   private readonly RETRY_DELAY = 1000
 
-  async addJob(type: string, data: any): Promise<void> {
+  async addJob(type: string, data: JobData): Promise<void> {
     const job: Job = {
       id: nanoid(),
       type,
@@ -48,7 +62,7 @@ class JobQueueManager {
 
       switch (job.type) {
         case 'recordClick':
-          await this.handleRecordClick(job.data)
+          await this.handleRecordClick(job.data as RecordClickJobData)
           break
         default:
           console.error(`Unknown job type: ${job.type}`)
@@ -68,7 +82,7 @@ class JobQueueManager {
     }
   }
 
-  private async handleRecordClick(data: any): Promise<void> {
+  private async handleRecordClick(data: RecordClickJobData): Promise<void> {
     try {
       // Get geolocation data if IP info token is available
       let country, city

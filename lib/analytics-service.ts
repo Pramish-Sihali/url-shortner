@@ -46,7 +46,7 @@ export class AnalyticsService {
         .update(ip + 'url-shortener-salt')
         .digest('hex')
         .substring(0, 32) // Limit length
-    } catch (error) {
+    } catch {
       // Fallback to simple encoding if crypto fails
       return Buffer.from(ip + 'fallback').toString('base64').substring(0, 32)
     }

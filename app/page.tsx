@@ -62,8 +62,8 @@ export default function UrlShortener() {
       if (data.success) {
         setUrls(data.data);
       }
-    } catch (error) {
-      console.error('Failed to load URLs:', error);
+    } catch {
+      console.error('Failed to load URLs');
     }
   };
 
@@ -74,8 +74,8 @@ export default function UrlShortener() {
       if (data.success) {
         setAnalytics(data.data);
       }
-    } catch (error) {
-      console.error('Failed to load analytics:', error);
+    } catch {
+      console.error('Failed to load analytics');
     }
   };
 
@@ -106,7 +106,7 @@ export default function UrlShortener() {
       } else {
         setError(data.error || 'Failed to create short URL');
       }
-    } catch (error) {
+    } catch {
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
@@ -123,8 +123,8 @@ export default function UrlShortener() {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here
-    } catch (error) {
-      console.error('Failed to copy:', error);
+    } catch {
+      console.error('Failed to copy');
     }
   };
 
