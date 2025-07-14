@@ -1,12 +1,13 @@
 // app/api/urls/route.ts
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { UrlService } from '@/lib/url-service'
+import { getBaseUrl } from '@/lib/url-helper'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const urls = await UrlService.getAllUrls()
     
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const baseUrl = getBaseUrl(request)
     
     const formattedUrls = urls.map(url => ({
       id: url.id,

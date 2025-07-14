@@ -1,6 +1,7 @@
 // app/api/shorten/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { UrlService } from '@/lib/url-service'
+import { getBaseUrl } from '@/lib/url-helper'
 import { z } from 'zod'
 
 const createUrlSchema = z.object({
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
       expiresAt: expiresAt ? new Date(expiresAt) : undefined,
     })
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const baseUrl = getBaseUrl(request)
     const shortLink = `${baseUrl}/${shortUrl.short_code}`
 
     return NextResponse.json({
