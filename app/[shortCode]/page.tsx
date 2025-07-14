@@ -23,7 +23,7 @@ function ClientRedirect({ url }: { url: string }) {
           className="text-blue-600 hover:text-blue-800 underline"
           rel="noopener noreferrer"
         >
-          Click here if you're not redirected automatically
+          Click here if you&lsquo;re not redirected automatically
         </a>
       </div>
       <script

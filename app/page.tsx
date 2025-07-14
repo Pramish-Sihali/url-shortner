@@ -1,7 +1,7 @@
 "use client" ; 
 
 import React, { useState, useEffect } from 'react';
-import { Copy, ExternalLink, BarChart3, Link2, Zap, Shield, Globe, Plus, Calendar, MousePointer } from 'lucide-react';
+import { Copy, ExternalLink, BarChart3, Link2, Globe, Plus, Calendar, MousePointer } from 'lucide-react';
 
 // TypeScript interfaces
 interface UrlItem {
@@ -156,20 +156,7 @@ export default function UrlShortener() {
                 <p className="text-sm text-gray-600">Fast, reliable, and analytics-powered</p>
               </div>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-gray-600">
-              <div className="flex items-center space-x-2">
-                <Zap className="h-4 w-4 text-blue-600" />
-                <span>Lightning Fast</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Shield className="h-4 w-4 text-green-600" />
-                <span>Secure</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <BarChart3 className="h-4 w-4 text-purple-600" />
-                <span>Analytics</span>
-              </div>
-            </div>
+           
           </div>
         </div>
       </header>
@@ -414,16 +401,6 @@ export default function UrlShortener() {
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white border-t mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600">
-            <p>Built with Next.js, TypeScript, and Supabase</p>
-            <p className="text-sm mt-2">Demonstrating backend engineering excellence</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
